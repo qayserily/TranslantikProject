@@ -235,8 +235,8 @@ public class BrowserUtils {
      * @param element
      */
     public static void clickWithJS(WebElement element) {
-        ((JavascriptExecutor) com.vytrack.utilities.Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
-        ((JavascriptExecutor) com.vytrack.utilities.Driver.get()).executeScript("arguments[0].click();", element);
+        ((JavascriptExecutor) com.translantik.utilities.Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) com.translantik.utilities.Driver.get()).executeScript("arguments[0].click();", element);
     }
 
 
@@ -246,7 +246,7 @@ public class BrowserUtils {
      * @param element
      */
     public static void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) com.vytrack.utilities.Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) com.translantik.utilities.Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     /**
@@ -255,7 +255,7 @@ public class BrowserUtils {
      * @param element
      */
     public static void doubleClick(WebElement element) {
-        new Actions(com.vytrack.utilities.Driver.get()).doubleClick(element).build().perform();
+        new Actions(com.translantik.utilities.Driver.get()).doubleClick(element).build().perform();
     }
 
     /**
@@ -266,7 +266,7 @@ public class BrowserUtils {
      * @param attributeValue
      */
     public static void setAttribute(WebElement element, String attributeName, String attributeValue) {
-        ((JavascriptExecutor) com.vytrack.utilities.Driver.get()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attributeName, attributeValue);
+        ((JavascriptExecutor) com.translantik.utilities.Driver.get()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attributeName, attributeValue);
     }
 
     /**
@@ -274,9 +274,9 @@ public class BrowserUtils {
      * @param element
      */
     public static void highlight(WebElement element) {
-        ((JavascriptExecutor) com.vytrack.utilities.Driver.get()).executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+        ((JavascriptExecutor) com.translantik.utilities.Driver.get()).executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
         waitFor(1);
-        ((JavascriptExecutor) com.vytrack.utilities.Driver.get()).executeScript("arguments[0].removeAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+        ((JavascriptExecutor) com.translantik.utilities.Driver.get()).executeScript("arguments[0].removeAttribute('style', 'background: yellow; border: 2px solid red;');", element);
     }
 
     /**
@@ -320,7 +320,7 @@ public class BrowserUtils {
      * @param element
      */
     public static void executeJScommand(WebElement element, String command) {
-        JavascriptExecutor jse = (JavascriptExecutor) com.vytrack.utilities.Driver.get();
+        JavascriptExecutor jse = (JavascriptExecutor) com.translantik.utilities.Driver.get();
         jse.executeScript(command, element);
 
     }
@@ -331,7 +331,7 @@ public class BrowserUtils {
      * @param command
      */
     public static void executeJScommand(String command) {
-        JavascriptExecutor jse = (JavascriptExecutor) com.vytrack.utilities.Driver.get();
+        JavascriptExecutor jse = (JavascriptExecutor) com.translantik.utilities.Driver.get();
         jse.executeScript(command);
 
     }
@@ -350,7 +350,7 @@ public class BrowserUtils {
         while (counter < attempts) {
             try {
                 //selenium must look for element again
-                clickWithJS(com.vytrack.utilities.Driver.get().findElement(by));
+                clickWithJS(com.translantik.utilities.Driver.get().findElement(by));
                 //if click is successful - then break
                 break;
             } catch (WebDriverException e) {
@@ -372,7 +372,7 @@ public class BrowserUtils {
      * @param time
      */
     public static void waitForPresenceOfElement(By by, long time) {
-        new WebDriverWait(com.vytrack.utilities.Driver.get(), time).until(ExpectedConditions.presenceOfElementLocated(by));
+        new WebDriverWait(com.translantik.utilities.Driver.get(), time).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
 
