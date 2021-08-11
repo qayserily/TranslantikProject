@@ -29,5 +29,8 @@ public class CarPage {
     @FindBy(css = "[href='#scroll-2-4293']")
     public WebElement activity;
 
+    @FindBy(xpath = "//*[@id=\"grid-custom-entity-grid-1599136380\"]/div[2]")
+    public WebElement modelActivitiy;
+
 
 }

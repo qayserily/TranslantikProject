@@ -1,30 +1,83 @@
 package com.translantik.step_definitions;
 
+import com.translantik.pages.CarPage;
+import com.translantik.pages.LoginPage;
+import com.translantik.pages.VehicleModelPage;
+import com.translantik.utilities.BrowserUtils;
+import com.translantik.utilities.ConfigurationReader;
+import com.translantik.utilities.Driver;
 import io.cucumber.java.en.*;
+import org.apache.commons.io.output.BrokenWriter;
+import org.junit.Assert;
+
+import java.util.List;
+
 
 public class GeneralInformationDefs {
-    @Given("User can navigate to the {string} page by clicking on the {string} sign under {string}...{string}")
-    public void user_can_navigate_to_the_page_by_clicking_on_the_sign_under(String string, String string2, String string3, String string4) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Given("The user is on the login page")
+    public void the_user_is_on_the_login_page() {
+        String loginUrl = ConfigurationReader.get("url") ;
+        Driver.get().get(loginUrl);
+
+    }
+    @And("{string} should be able to login with its {string}")
+    public void shouldBeAbleToLoginWithIts(String username, String password) {
+        String username = ConfigurationReader.get("driver_username") ;
+        String password = ConfigurationReader.get("driver_password") ;
+
+        LoginPage loginPage = new LoginPage();
+        loginPage.login(username, password);
     }
 
-    @Given("User should see {string}, {string} and {string} buttons on the {string}")
-    public void user_should_see_and_buttons_on_the(String string, String string2, String string3, String string4) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+    @Given("User can navigate to the {string} page by clicking on the {string} sign under {string}...{string}")
+    public void user_can_navigate_to_the_page_by_clicking_on_the_sign_under() {
+
+        VehicleModelPage vehicleModelPage = new VehicleModelPage();
+        vehicleModelPage.vehicleModels.click();
+
+         }
+
+    @Given("User should see {string}, {string} and {string} buttons on the General Information")
+    public void user_should_see_and_buttons_on_the(String edit, String delete, String addAttachment, String modelActivity) {
+       VehicleModelPage vehicleModelPage = new VehicleModelPage();
+       vehicleModelPage.teslaCar.click();
+
+        // burda kodlar eksik yazılacak
+        CarPage carPage = new CarPage();
+
+        BrowserUtils.verifyElementDisplayed(carPage.editButton);
+        BrowserUtils.verifyElementDisplayed(carPage.deleteButton);
+        BrowserUtils.verifyElementDisplayed(carPage.attachmentButton);
+        BrowserUtils.verifyElementDisplayed(carPage.addNoteButton);
+
+        /*    System.out.println("carPage.editButton.isDisplayed() = " + carPage.editButton.isDisplayed());
+            System.out.println("carPage.deleteButton.isDisplayed() = " + carPage.deleteButton.isDisplayed());
+            System.out.println("carPage.attachmentButton.isDisplayed() = " + carPage.attachmentButton.isDisplayed());
+            System.out.println("carPage.addNoteButton.isDisplayed() = " + carPage.addNoteButton.isDisplayed()); */
+        }
 
     @When("User can see created activities by click on the Activity module on the ''General Information'' page")
     public void user_can_see_created_activities_by_click_on_the_Activity_module_on_the_General_Information_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        CarPage carPage = new CarPage();
+        carPage.activity.click();
+
+        String actualTitle = Driver.get().getTitle();
+        Assert.assertEquals("Entities / Vehicles Model / Model S Tesla 23",actualTitle);
     }
 
     @Then("All of the information between the {string} page and table should be matched")
-    public void all_of_the_information_between_the_page_and_table_should_be_matched(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void all_of_the_information_between_the_page_and_table_should_be_matched(List<String> expectedTabsList) {
+        String actualTitle = Driver.get().getTitle() ;
+        Assert.assertEquals("All Vehicles Model",actualTitle);
+
+        System.out.println("TableMap = " + expectedTabsList);
+        BrowserUtils.waitFor(2);
+
+        List<String> actualTabList = BrowserUtils.getElementsText(new CarPage().modelActivitiy);
+
+        System.out.println("actualTabList = " + actualTabList);
+        Assert.assertEquals(expectedTabsList, actualTabList);
     }
+
 
 }

@@ -2,8 +2,11 @@
 Feature: User can navigate to the "General Infirmation" page by clicking on the related car
 
     Scenario Outline:
-        Given User can navigate to the "General Infirmation" page by clicking on the "eye" sign under ''...''
-        And User should see "edit", "delete" and "add event" buttons on the "General Information"
+
+        Given The user is on the login page
+        And "User" should be able to login with its "Password"
+        And User can navigate to the "General Infirmation" page by clicking on the "eye" sign under ''...''
+        And User should see "edit", "delete" and "add event" buttons on the General Information
         When User can see created activities by click on the Activity module on the ''General Information'' page
         Then All of the information between the "General Information" page and table should be matched
 
