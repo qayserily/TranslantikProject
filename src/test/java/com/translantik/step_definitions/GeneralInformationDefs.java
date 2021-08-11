@@ -22,8 +22,8 @@ public class GeneralInformationDefs {
     }
     @And("{string} should be able to login with its {string}")
     public void shouldBeAbleToLoginWithIts(String username, String password) {
-        String username = ConfigurationReader.get("driver_username") ;
-        String password = ConfigurationReader.get("driver_password") ;
+        username = ConfigurationReader.get("driver_username") ;
+        password = ConfigurationReader.get("driver_password") ;
 
         LoginPage loginPage = new LoginPage();
         loginPage.login(username, password);
