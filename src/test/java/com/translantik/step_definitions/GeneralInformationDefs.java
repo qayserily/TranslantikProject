@@ -1,13 +1,13 @@
 package com.translantik.step_definitions;
 
 import com.translantik.pages.CarPage;
+import com.translantik.pages.GeneralInformationPage;
 import com.translantik.pages.LoginPage;
 import com.translantik.pages.VehicleModelPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.ConfigurationReader;
 import com.translantik.utilities.Driver;
 import io.cucumber.java.en.*;
-import org.apache.commons.io.output.BrokenWriter;
 import org.junit.Assert;
 
 import java.util.List;
@@ -66,17 +66,20 @@ public class GeneralInformationDefs {
     }
 
     @Then("All of the information between the {string} page and table should be matched")
-    public void all_of_the_information_between_the_page_and_table_should_be_matched(List<String> expectedTabsList) {
+    public void all_of_the_information_between_the_page_and_table_should_be_matched() {
         String actualTitle = Driver.get().getTitle() ;
         Assert.assertEquals("All Vehicles Model",actualTitle);
 
-        System.out.println("TableMap = " + expectedTabsList);
         BrowserUtils.waitFor(2);
 
-        List<String> actualTabList = BrowserUtils.getElementsText(new CarPage().modelActivitiy);
+        List<String> actualList = BrowserUtils.getElementsText(new CarPage().teslaCar);
+        System.out.println(actualList);
+        System.out.println("------------------------------------------------");
+        List<String> expectedList = new GeneralInformationPage().getALlInfo();
+        System.out.println(expectedList);
 
-        System.out.println("actualTabList = " + actualTabList);
-        Assert.assertEquals(expectedTabsList, actualTabList);
+        System.out.println("actualTabList = " + actualList);
+        Assert.assertEquals(expectedList, actualList);
     }
 
 

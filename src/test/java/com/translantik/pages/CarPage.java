@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CarPage {
+import java.util.List;
+
+public class CarPage extends BasePage{
     public CarPage() {
 
         PageFactory.initElements(Driver.get(), this);
@@ -29,8 +31,9 @@ public class CarPage {
     @FindBy(css = "[href='#scroll-2-4293']")
     public WebElement activity;
 
-    @FindBy(xpath = "//*[@id=\"grid-custom-entity-grid-1599136380\"]/div[2]")
-    public WebElement modelActivitiy;
+
+    @FindBy(xpath = "//table/tbody/tr[1]")
+    public List<WebElement> teslaCar;
 
 
 }
